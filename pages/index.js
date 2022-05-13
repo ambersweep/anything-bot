@@ -31,7 +31,6 @@ export default function Home() {
     });
     const data = await response.json();
     setResult(data.result);
-    console.log(result);
   }
 
   return (
@@ -49,13 +48,12 @@ export default function Home() {
             for experimenting with the OpenAI API.
           </p>
           <p>
-            {" "}
             Write out a prompt, or try one of the example prompts below to
             experience the magic! 🪄
           </p>
           <p>
             <small>
-              You can learn more about OpenAI{" "}
+              You can learn more about OpenAI
               <a href="https://beta.openai.com" target="_blank">
                 here
               </a>
@@ -79,8 +77,7 @@ export default function Home() {
               <p className="mt-2">
                 {!engine ? (
                   <p className="text-secondary mt-2">
-                    {" "}
-                    Please select an engine{" "}
+                    Please select an engine
                   </p>
                 ) : (
                   "Current Engine: " + engineText
@@ -134,7 +131,6 @@ export default function Home() {
                   </UncontrolledButtonDropdown>
 
                   {/* Dropdown for choosing example prompts */}
-
                   <UncontrolledButtonDropdown>
                     <DropdownToggle color="info" className="ml-2 mt-2" caret>
                       Prompt Examples
@@ -180,11 +176,9 @@ export default function Home() {
                     </DropdownMenu>
                   </UncontrolledButtonDropdown>
 
-                  {/*Submits prompt */}
-
+                  {/* Submits prompt */}
                   <Button type="submit" color="primary" className="ml-2 mt-2">
-                    {" "}
-                    <FaCheck /> Submit Prompt{" "}
+                    <FaCheck /> Submit Prompt
                   </Button>
                 </div>
               </div>

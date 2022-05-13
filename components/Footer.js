@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer class="container d-flex flex-wrap justify-content-center py-3 border-top fixed-bottom bg-light">
+    <footer class="container d-flex flex-wrap justify-content-center py-3 border-top mt-5 bg-light">
       <div class="row">
         <a href="/" class=" text-muted text-decoration-none lh-1"></a>
         <p class="text-muted text-center">Created by Amber Sweep</p>
