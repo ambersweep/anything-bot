@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CreateResponse from "../components/CreateResponse";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -40,9 +41,10 @@ export default function Home() {
       </Head>
 
 <body className="bg-light" style={{height:"100%"}}>
-      <div className="container-fluid border-bottom">
+      <div className="container-fluid">
        <Header/>
       </div>
+      <div className="container border-bottom"></div>
       <br></br>
       <main className="container-fluid d-flex justify-content-center align-items-center">
         <div className="text-center">
@@ -124,26 +126,26 @@ export default function Home() {
                   <DropdownItem divider />
                   <DropdownItem
                     onClick={(e) => {
-                      setPrompt("Convert 10 USD into Yen.");
+                      setPrompt("Make me a quirky name for my pet rock store.");
                     }}
                   >
-                    Currency Converter
+                    Shop Namer
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem
                     onClick={(e) => {
-                      setPrompt("Write me a joke about cyborg kittens.");
+                      setPrompt("Write me a clickbait blog title about skateboarding.");
                     }}
                   >
-                    Joke Writer
+                    Clickbait Generator
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem
                     onClick={(e) => {
-                      setPrompt("Make me a short lunch recipe.");
+                      setPrompt("Make me a fruity drink recipe and give it a name.");
                     }}
                   >
-                    Recipe Creator
+                    Drink Creator
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledButtonDropdown>
@@ -157,16 +159,10 @@ export default function Home() {
           </Form>
 
           <hr></hr>
-          <h2>Responses </h2>
-          <div>
-            <strong>Prompt: </strong>
-            {prompt}
-          </div>
-          <div>
-            <p>
-              <strong>Response:</strong>
-              {result}
-            </p>
+          <h3>Responses</h3>
+          <br></br>
+        <div className="container">
+            <CreateResponse prompt={prompt} response={result}/>
           </div>
         </div>
       </main>
