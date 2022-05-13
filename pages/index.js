@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaRobot } from 'react-icons/fa';
+import { FaRobot, FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa";
 import Head from "next/head";
 import React, { useState } from "react";
 import {
@@ -36,7 +36,7 @@ export default function Home() {
     });
     const data = await response.json();
     setResult(data.result);
-    console.log(result)
+    console.log(result);
   }
 
   return (
@@ -46,23 +46,25 @@ export default function Home() {
       </Head>
 
       <div>
-        <Navbar color="light" expand fixed="">
-        <FaRobot size="2em" className="mr-2"/>
+        <Navbar expand fixed="">
+          <FaRobot size="2em" className="mr-2" />
           <NavbarBrand href="/"> OpenAI Engine Tester</NavbarBrand>
           <NavbarToggler onClick={function noRefCheck() {}} />
           <Collapse navbar>
             <Nav className="me-auto" navbar>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  GitHub
+                <NavLink
+                  href="https://beta.openai.com/overview"
+                  target="_blank"
+                >
+                  Created With OpenAi
                 </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
-          <NavbarText> by Amber Sweep</NavbarText>
         </Navbar>
       </div>
-<br></br>
+      <br></br>
       <main className="container-fluid d-flex justify-content-center align-items-center">
         <div className="col-lg-6 text-center">
           <Form onSubmit={onSubmit}>
@@ -74,10 +76,15 @@ export default function Home() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
-            
 
             {/* Displays current engine */}
-            <p>{!engine ? " Please Select An Engine" : "Current Engine: " + engineText}</p>
+            <p>
+              {!engine ? (
+                <p className="text-danger"> Please Select An Engine </p>
+              ) : (
+                "Current Engine: " + engineText
+              )}
+            </p>
 
             {/* Dropdown menu for choosing an engine */}
             <div className="row justify-content-center">
@@ -90,7 +97,7 @@ export default function Home() {
                       setEngineText("DaVinci");
                     }}
                   >
-                    Davinci
+                    DaVinci
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem
@@ -99,7 +106,7 @@ export default function Home() {
                       setEngineText("Curie");
                     }}
                   >
-                    Curie
+                    Curie (Recommended)
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem
@@ -123,7 +130,9 @@ export default function Home() {
               </UncontrolledButtonDropdown>
               {/* Dropdown for choosing example prompts */}
               <UncontrolledButtonDropdown>
-                <DropdownToggle color="info" className="ml-2" caret>Prompt Examples</DropdownToggle>
+                <DropdownToggle color="info" className="ml-2" caret>
+                  Prompt Examples
+                </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem
                     onClick={(e) => {
@@ -143,10 +152,10 @@ export default function Home() {
                   <DropdownItem divider />
                   <DropdownItem
                     onClick={(e) => {
-                      setPrompt("Tell me how to treat a burn.");
+                      setPrompt("Write me a joke about cyborg kittens.");
                     }}
                   >
-                    First Aid Instructions
+                    Joke Writer
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem
@@ -168,11 +177,47 @@ export default function Home() {
 
           <hr></hr>
           <h2>Responses </h2>
-          <div><strong>Prompt: </strong>{prompt}</div>
-          <div><p><strong>Response:</strong>{result}</p></div>
+          <div>
+            <strong>Prompt: </strong>
+            {prompt}
+          </div>
+          <div>
+            <p>
+              <strong>Response:</strong>
+              {result}
+            </p>
+          </div>
         </div>
       </main>
+      <div class="container fixed-bottom">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a
+              href="/"
+              class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+            ></a>
+            <span class="text-muted">© 2022 by Amber Sweep</span>
+          </div>
+
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3 ml-2">
+              <a href="https://github.com/ambersweep" target="_blank">
+                <FaGithub /> Github
+              </a>
+            </li>
+            <li class="ms-3 ml-2">
+              <a href="https://www.linkedin.com/in/amber-sweep" target="_blank">
+                <FaLinkedin /> LinkedIn
+              </a>
+            </li>
+            <li class="ms-3 ml-2">
+              <a href="https://acsweep.dev/" target="_blank">
+                <FaGlobe /> Portfolio
+              </a>
+            </li>
+          </ul>
+        </footer>
+      </div>
     </div>
   );
-
 }
