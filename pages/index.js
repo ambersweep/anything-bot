@@ -9,15 +9,9 @@ import {
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
-  Collapse,
-  Nav,
-  Navbar,
-  NavLink,
-  NavbarText,
-  NavbarBrand,
-  NavItem,
-  NavbarToggler,
 } from "reactstrap";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -45,31 +39,17 @@ export default function Home() {
         <title>OpenAI Tester</title>
       </Head>
 
-      <div>
-        <Navbar expand fixed="">
-          <FaRobot size="2em" className="mr-2" />
-          <NavbarBrand href="/"> OpenAI Engine Tester</NavbarBrand>
-          <NavbarToggler onClick={function noRefCheck() {}} />
-          <Collapse navbar>
-            <Nav className="me-auto" navbar>
-              <NavItem>
-                <NavLink
-                  href="https://beta.openai.com/overview"
-                  target="_blank"
-                >
-                  Created With OpenAi
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+<body className="bg-light" style={{height:"100%"}}>
+      <div className="container-fluid border-bottom">
+       <Header/>
       </div>
       <br></br>
       <main className="container-fluid d-flex justify-content-center align-items-center">
-        <div className="col-lg-6 text-center">
+        <div className="text-center">
           <Form onSubmit={onSubmit}>
             <textarea
               name="promptBox"
+              className="form-control"
               rows="5"
               cols="40"
               placeholder="Enter a prompt..."
@@ -77,17 +57,17 @@ export default function Home() {
               onChange={(e) => setPrompt(e.target.value)}
             />
 
-            {/* Displays current engine */}
-            <p>
+            {/* Displays current engine. If no engine is selected, displays warning text */}
+            <p className="mt-2">
               {!engine ? (
-                <p className="text-danger"> Please Select An Engine </p>
+                <p className="text-danger mt-2"> Please Select An Engine </p>
               ) : (
                 "Current Engine: " + engineText
               )}
             </p>
 
             {/* Dropdown menu for choosing an engine */}
-            <div className="row justify-content-center">
+            <div className="justify-content-center">
               <UncontrolledButtonDropdown>
                 <DropdownToggle caret>Choose Engine</DropdownToggle>
                 <DropdownMenu>
@@ -167,6 +147,7 @@ export default function Home() {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledButtonDropdown>
+
               {/*Submits prompt */}
               <Button type="submit" color="primary" className="ml-2">
                 {" "}
@@ -189,35 +170,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <div class="container fixed-bottom">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-          <div class="col-md-4 d-flex align-items-center">
-            <a
-              href="/"
-              class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
-            ></a>
-            <span class="text-muted">© 2022 by Amber Sweep</span>
-          </div>
-
-          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3 ml-2">
-              <a href="https://github.com/ambersweep" target="_blank">
-                <FaGithub /> Github
-              </a>
-            </li>
-            <li class="ms-3 ml-2">
-              <a href="https://www.linkedin.com/in/amber-sweep" target="_blank">
-                <FaLinkedin /> LinkedIn
-              </a>
-            </li>
-            <li class="ms-3 ml-2">
-              <a href="https://acsweep.dev/" target="_blank">
-                <FaGlobe /> Portfolio
-              </a>
-            </li>
-          </ul>
-        </footer>
-      </div>
+      <Footer/>
+      </body>
     </div>
   );
 }
