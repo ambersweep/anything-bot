@@ -18,33 +18,33 @@ import CreateResponse from "../components/CreateResponse";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState();
-  const [responses, setResponses] = useState([])
+  const [responses, setResponses] = useState([]);
   const [engine, setEngine] = useState("");
   const [engineText, setEngineText] = useState();
-  const [postId, setPostId] = useState()
-  let resultData = []
-  let apiResp = []
- 
+  const [postId, setPostId] = useState();
+  let resultData = [];
+  let apiResp = [];
+
   async function onSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ promptBox: prompt, engine: engine}),
+      body: JSON.stringify({ promptBox: prompt, engine: engine }),
     });
-    const data = await response.json()
-    console.log(data)
-    apiResp.push(data.result)
-    console.log(apiResp)
+    const data = await response.json();
+    console.log(data);
+    apiResp.push(data.result);
+    console.log(apiResp);
     setResult(await data.result);
-    setPrompt(await data.prompt)
-    setPostId(await data.postId)
-    apiResp = await data.result
-    resultData = {apiResp, prompt}
-    setResponses([...responses, resultData])
-    console.log(responses)
+    setPrompt(await data.prompt);
+    setPostId(await data.postId);
+    apiResp = await data.result;
+    resultData = { apiResp, prompt };
+    setResponses([...responses, resultData].reverse());
+    console.log(responses);
   }
 
   return (
@@ -67,8 +67,10 @@ export default function Home() {
           </p>
           <p>
             <small>
-              You can learn more about OpenAI 
-              <a href="https://beta.openai.com" target="_blank"> here
+              You can learn more about OpenAI
+              <a href="https://beta.openai.com" target="_blank">
+                {" "}
+                here
               </a>
               .
             </small>
@@ -78,28 +80,23 @@ export default function Home() {
           <div className="text-center">
             <Form onSubmit={onSubmit}>
               <div className="container">
-              <Input
-                type="textarea"
-                name="promptBox"
-              
-                placeholder="Enter a prompt..."
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                required
-              />
+                <Input
+                  type="textarea"
+                  name="promptBox"
+                  placeholder="Enter a prompt..."
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  required
+                />
               </div>
 
               {/* Displays current engine. If no engine is selected, displays warning text */}
               <div className="mt-2">
-            
                 {!engine ? (
-                  <p className="text-secondary mt-2">
-                    Please select an engine
-                  </p>
+                  <p className="text-secondary mt-2">Please select an engine</p>
                 ) : (
                   <p>Current Engine: {engineText}</p>
                 )}
-              
               </div>
 
               {/* Dropdown menu for choosing an engine */}
@@ -184,9 +181,7 @@ export default function Home() {
                       <DropdownItem divider />
                       <DropdownItem
                         onClick={(e) => {
-                          setPrompt(
-                            "Create an alien planet."
-                          );
+                          setPrompt("Create an alien planet.");
                         }}
                       >
                         Planet Creator
@@ -201,16 +196,19 @@ export default function Home() {
                 </div>
               </div>
             </Form>
-
             <hr></hr>
             <h4>Responses</h4>
             <br></br>
             <div>
-            <ul>
-            {responses.map((response, index) => (
-                <CreateResponse prompt={response.prompt} response={response.apiResp} key={index} />
-              ))}
-            </ul>
+              <ul className="container">
+                {responses.map((response, index) => (
+                  <CreateResponse
+                    prompt={response.prompt}
+                    response={response.apiResp}
+                    key={index}
+                  />
+                ))}
+              </ul>
             </div>
           </div>
         </main>
