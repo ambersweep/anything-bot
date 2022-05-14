@@ -8,4 +8,3 @@ OpenAI’s API provides access to GPT-3, which performs a wide variety of natura
 - OpenAi
 - Reactstrap
 - React-icons
-- Bootstrap Build - Minty
