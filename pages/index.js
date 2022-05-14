@@ -148,7 +148,7 @@ export default function Home() {
 
                   {/* Dropdown for choosing example prompts */}
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle color="info" className="m-2" caret>
+                    <DropdownToggle color="secondary" className="m-2" caret>
                       Prompt Examples
                     </DropdownToggle>
                     <DropdownMenu>
