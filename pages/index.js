@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaCheck } from "react-icons/fa";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Form,
@@ -9,6 +9,7 @@ import {
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
+  Input,
 } from "reactstrap";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -17,24 +18,37 @@ import CreateResponse from "../components/CreateResponse";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState();
+  const [responses, setResponses] = useState([])
   const [engine, setEngine] = useState("");
   const [engineText, setEngineText] = useState();
-
+  const [postId, setPostId] = useState()
+  let resultData = []
+  let apiResp = []
+ 
   async function onSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ promptBox: prompt, engine: engine }),
+      body: JSON.stringify({ promptBox: prompt, engine: engine}),
     });
-    const data = await response.json();
-    setResult(data.result);
+    const data = await response.json()
+    console.log(data)
+    apiResp.push(data.result)
+    console.log(apiResp)
+    setResult(await data.result);
+    setPrompt(await data.prompt)
+    setPostId(await data.postId)
+    apiResp = await data.result
+    resultData = {apiResp, prompt}
+    setResponses([...responses, resultData])
+    console.log(responses)
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>OpenAI Tester</title>
       </Head>
@@ -53,9 +67,8 @@ export default function Home() {
           </p>
           <p>
             <small>
-              You can learn more about OpenAI
-              <a href="https://beta.openai.com" target="_blank">
-                here
+              You can learn more about OpenAI 
+              <a href="https://beta.openai.com" target="_blank"> here
               </a>
               .
             </small>
@@ -64,31 +77,36 @@ export default function Home() {
         <main className="container-flex d-flex justify-content-center align-items-center">
           <div className="text-center">
             <Form onSubmit={onSubmit}>
-              <textarea
+              <div className="container">
+              <Input
+                type="textarea"
                 name="promptBox"
-                cols="40"
+              
                 placeholder="Enter a prompt..."
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 required
               />
+              </div>
 
               {/* Displays current engine. If no engine is selected, displays warning text */}
-              <p className="mt-2">
+              <div className="mt-2">
+            
                 {!engine ? (
                   <p className="text-secondary mt-2">
                     Please select an engine
                   </p>
                 ) : (
-                  "Current Engine: " + engineText
+                  <p>Current Engine: {engineText}</p>
                 )}
-              </p>
+              
+              </div>
 
               {/* Dropdown menu for choosing an engine */}
               <div className="row justify-content-center">
                 <div className="col-xs-4">
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle caret className="mt-2">
+                    <DropdownToggle caret className="m-2">
                       Choose Engine
                     </DropdownToggle>
                     <DropdownMenu>
@@ -132,7 +150,7 @@ export default function Home() {
 
                   {/* Dropdown for choosing example prompts */}
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle color="info" className="ml-2 mt-2" caret>
+                    <DropdownToggle color="info" className="m-2" caret>
                       Prompt Examples
                     </DropdownToggle>
                     <DropdownMenu>
@@ -167,17 +185,17 @@ export default function Home() {
                       <DropdownItem
                         onClick={(e) => {
                           setPrompt(
-                            "Make me a fruity drink recipe and give it a name."
+                            "Create an alien planet."
                           );
                         }}
                       >
-                        Drink Creator
+                        Planet Creator
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledButtonDropdown>
 
                   {/* Submits prompt */}
-                  <Button type="submit" color="primary" className="ml-2 mt-2">
+                  <Button type="submit" color="primary" className="m-2">
                     <FaCheck /> Submit Prompt
                   </Button>
                 </div>
@@ -187,13 +205,17 @@ export default function Home() {
             <hr></hr>
             <h4>Responses</h4>
             <br></br>
-            <div className="container">
-              <CreateResponse prompt={prompt} response={result} />
+            <div>
+            <ul>
+            {responses.map((response, index) => (
+                <CreateResponse prompt={response.prompt} response={response.apiResp} key={index} />
+              ))}
+            </ul>
             </div>
           </div>
         </main>
       </body>
       <Footer />
-    </div>
+    </>
   );
 }
