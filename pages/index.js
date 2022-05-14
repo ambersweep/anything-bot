@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaCheck } from "react-icons/fa";
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Form,
@@ -21,10 +21,13 @@ export default function Home() {
   const [responses, setResponses] = useState([]);
   const [engine, setEngine] = useState("");
   const [engineText, setEngineText] = useState();
-  const [postId, setPostId] = useState();
+
+  //Holds apiResp and prompt
   let resultData = [];
+  //Holds result data from api response
   let apiResp = [];
 
+  //Submit handler
   async function onSubmit(event) {
     event.preventDefault();
     const response = await fetch("/api/generate", {
@@ -35,16 +38,13 @@ export default function Home() {
       body: JSON.stringify({ promptBox: prompt, engine: engine }),
     });
     const data = await response.json();
-    console.log(data);
-    apiResp.push(data.result);
-    console.log(apiResp);
     setResult(await data.result);
     setPrompt(await data.prompt);
-    setPostId(await data.postId);
+    //holds result
     apiResp = await data.result;
     resultData = { apiResp, prompt };
+    // Sets Responses to api data and reverses it to display newest to oldest
     setResponses([...responses, resultData].reverse());
-    console.log(responses);
   }
 
   return (
@@ -53,7 +53,7 @@ export default function Home() {
         <title>OpenAI Tester</title>
       </Head>
 
-      <body className="bg-light" style={{ height: "100%" }}>
+      <body className="bg-light">
         <Header />
         <br></br>
         <div className="container text-center">
@@ -67,25 +67,26 @@ export default function Home() {
           </p>
           <p>
             <small>
-              You can learn more about OpenAI
+              You can learn more about OpenAI {" "}
               <a href="https://beta.openai.com" target="_blank">
-                {" "}
+
                 here
               </a>
               .
             </small>
           </p>
         </div>
-        <main className="container-flex d-flex justify-content-center align-items-center">
+        <div className="container-flex d-flex justify-content-center align-items-center">
           <div className="text-center">
             <Form onSubmit={onSubmit}>
-              <div className="container">
+              <div className="container" style={{width:"75%"}}>
                 <Input
                   type="textarea"
                   name="promptBox"
                   placeholder="Enter a prompt..."
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
+                //cannot submit without entering prompt
                   required
                 />
               </div>
@@ -197,10 +198,13 @@ export default function Home() {
               </div>
             </Form>
             <hr></hr>
-            <h4>Responses</h4>
+          
+            <h4 className="text-muted">Responses</h4>
+           
             <br></br>
-            <div>
-              <ul className="container">
+            <div className="container" style={{width:"95%"}}>
+              <ul>
+                {/* maps out responses so they appear dynamically when a prompt is submitted */}
                 {responses.map((response, index) => (
                   <CreateResponse
                     prompt={response.prompt}
@@ -211,7 +215,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-        </main>
+        </div>
       </body>
       <Footer />
     </>

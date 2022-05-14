@@ -3,16 +3,16 @@ import { Card, CardBody, CardText, CardTitle } from "reactstrap";
 
 export default function CreateResponse({ prompt, response}) {
   return (
-      <Card body>
+      <Card body className="mb-2">
         <CardBody>
-          <CardTitle tag="h6" className="text-left text-wrap">
+          <CardTitle tag="h6" className="text-left">
             <strong>Prompt: </strong>
           </CardTitle>
-          <CardText className="text-center">{prompt}</CardText>
-          <CardTitle tag="h6" className="text-left text-wrap">
+          <CardText className="text-center text-wrap">{prompt}</CardText>
+          <CardTitle tag="h6" className="text-left">
             <strong>Response: </strong>
           </CardTitle>
-          <CardText className="text-center">{response}</CardText>
+          <CardText className="text-center text-break">{response}</CardText>
         </CardBody>
       </Card>
   );
