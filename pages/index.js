@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import { FaCheck } from "react-icons/fa";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -52,7 +53,6 @@ export default function Home() {
       <Head>
         <title>OpenAI Tester</title>
       </Head>
-
       <body className="bg-light">
         <Header />
         <br></br>
@@ -94,7 +94,7 @@ export default function Home() {
               {/* Displays current engine. If no engine is selected, displays warning text */}
               <div className="mt-2">
                 {!engine ? (
-                  <p className="text-secondary mt-2">Please select an engine</p>
+                  <p className="text-danger mt-2">Please select an engine</p>
                 ) : (
                   <p>Current Engine: {engineText}</p>
                 )}
@@ -104,7 +104,7 @@ export default function Home() {
               <div className="row justify-content-center">
                 <div className="col-xs-4">
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle caret className="m-2">
+                    <DropdownToggle caret className="m-2"  color="primary">
                       Choose Engine
                     </DropdownToggle>
                     <DropdownMenu>
@@ -191,7 +191,7 @@ export default function Home() {
                   </UncontrolledButtonDropdown>
 
                   {/* Submits prompt */}
-                  <Button type="submit" color="primary" className="m-2">
+                  <Button type="submit" color="success" className="m-2">
                     <FaCheck /> Submit Prompt
                   </Button>
                 </div>
