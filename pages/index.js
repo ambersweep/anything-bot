@@ -51,15 +51,15 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>OpenAI Tester</title>
+        <title>Anything Bot</title>
       </Head>
       <body className="bg-light">
         <Header />
         <br></br>
         <div className="container text-center">
           <p>
-            Welcome to the <mark>OpenAI Engine Tester!</mark> Your playground
-            for experimenting with the OpenAI API.
+            Welcome to the <mark>Anything Bot!</mark> Here to creatively answer
+            virtually anything you can think of.
           </p>
           <p>
             Write out a prompt, or try one of the example prompts below to
@@ -67,9 +67,13 @@ export default function Home() {
           </p>
           <p>
             <small>
-              You can learn more about OpenAI {" "}
-              <a href="https://beta.openai.com" target="_blank">
-
+              Anything bot was built with the OpenAI API. You can learn more
+              about OpenAI{" "}
+              <a
+                href="https://beta.openai.com"
+                className="text-info text-decoration-none"
+                target="_blank"
+              >
                 here
               </a>
               .
@@ -79,14 +83,14 @@ export default function Home() {
         <div className="container-flex d-flex justify-content-center align-items-center">
           <div className="text-center">
             <Form onSubmit={onSubmit}>
-              <div className="container" style={{width:"75%"}}>
+              <div className="container" style={{ width: "75%" }}>
                 <Input
                   type="textarea"
                   name="promptBox"
                   placeholder="Enter a prompt..."
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
-                //cannot submit without entering prompt
+                  //cannot submit without entering prompt
                   required
                 />
               </div>
@@ -104,7 +108,11 @@ export default function Home() {
               <div className="row justify-content-center">
                 <div className="col-xs-4">
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle caret className="m-2"  color="primary">
+                    <DropdownToggle
+                      caret
+                      className="m-2 text-info"
+                      color="light"
+                    >
                       Choose Engine
                     </DropdownToggle>
                     <DropdownMenu>
@@ -148,7 +156,11 @@ export default function Home() {
 
                   {/* Dropdown for choosing example prompts */}
                   <UncontrolledButtonDropdown>
-                    <DropdownToggle color="secondary" className="m-2" caret>
+                    <DropdownToggle
+                      color="light"
+                      className="m-2 text-info"
+                      caret
+                    >
                       Prompt Examples
                     </DropdownToggle>
                     <DropdownMenu>
@@ -191,18 +203,18 @@ export default function Home() {
                   </UncontrolledButtonDropdown>
 
                   {/* Submits prompt */}
-                  <Button type="submit" color="success" className="m-2">
+                  <Button type="submit" color="primary" className="m-2">
                     <FaCheck /> Submit Prompt
                   </Button>
                 </div>
               </div>
             </Form>
             <hr></hr>
-          
+
             <h4 className="text-muted">Responses</h4>
-           
+
             <br></br>
-            <div className="container" style={{width:"95%"}}>
+            <div className="container mr-4" style={{ width: "95%" }}>
               <ul>
                 {/* maps out responses so they appear dynamically when a prompt is submitted */}
                 {responses.map((response, index) => (
