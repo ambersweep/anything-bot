@@ -203,7 +203,7 @@ export default function Home() {
                   </UncontrolledButtonDropdown>
 
                   {/* Submits prompt */}
-                  <Button type="submit" color="primary" className="m-2">
+                  <Button type="submit" color="info" className="m-2">
                     <FaCheck /> Submit Prompt
                   </Button>
                 </div>

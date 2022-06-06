@@ -11,17 +11,17 @@ export default function Footer() {
 
       <ul className="col-md-4 justify-content-center list-unstyled d-flex">
         <li class="ms-3 ml-2">
-          <a href="https://github.com/ambersweep" target="_blank">
+          <a href="https://github.com/ambersweep" className="text-info text-decoration-none" target="_blank">
             <FaGithub /> Github
           </a>
         </li>
         <li className="ms-3 ml-2">
-          <a href="https://www.linkedin.com/in/amber-sweep" target="_blank">
+          <a href="https://www.linkedin.com/in/amber-sweep" className="text-info text-decoration-none" target="_blank">
             <FaLinkedin /> LinkedIn
           </a>
         </li>
         <li className="ms-3 ml-2">
-          <a href="https://acsweep.dev/" target="_blank">
+          <a href="https://acsweep.dev/" className="text-info text-decoration-none" target="_blank">
             <FaGlobe /> Portfolio
           </a>
         </li>
