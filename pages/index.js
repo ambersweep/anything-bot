@@ -71,7 +71,7 @@ export default function Home() {
               about OpenAI{" "}
               <a
                 href="https://beta.openai.com"
-                className="text-info text-decoration-none"
+                className="text-primary text-decoration-none"
                 target="_blank"
               >
                 here
@@ -110,7 +110,7 @@ export default function Home() {
                   <UncontrolledButtonDropdown>
                     <DropdownToggle
                       caret
-                      className="m-2 text-info"
+                      className="m-2 text-primary"
                       color="light"
                     >
                       Choose Engine
@@ -158,7 +158,7 @@ export default function Home() {
                   <UncontrolledButtonDropdown>
                     <DropdownToggle
                       color="light"
-                      className="m-2 text-info"
+                      className="m-2 text-primary"
                       caret
                     >
                       Prompt Examples
@@ -203,14 +203,13 @@ export default function Home() {
                   </UncontrolledButtonDropdown>
 
                   {/* Submits prompt */}
-                  <Button type="submit" color="info" className="m-2">
+                  <Button type="submit" color="primary" className="m-2">
                     <FaCheck /> Submit Prompt
                   </Button>
                 </div>
               </div>
             </Form>
-            <hr></hr>
-
+            <br></br>
             <h4 className="text-muted">Responses</h4>
 
             <br></br>
